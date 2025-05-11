@@ -1,0 +1,150 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Vault files
+vault-data/
+vault/vault.log
+*.hcl
+!vault/config.hcl
+.vault-token
+vault.log
+vault.pid
+
+# Terraform files
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+.terraform.lock.hcl
+
+# Credentials and secrets
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.cer
+*.der
+*.p7b
+*.p7c
+*.p7s
+*.p8
+*.p8e
+*.p10
+*.csr
+*.crl
+*.srl
+*.jks
+*.keystore
+*.truststore
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.cer
+*.der
+*.p7b
+*.p7c
+*.p7s
+*.p8
+*.p8e
+*.p10
+*.csr
+*.crl
+*.srl
+*.jks
+*.keystore
+*.truststore
+
+# Temporary files
+*.tmp
+*.temp
+/tmp/
+/temp/
+
+# Logs
+*.log
+logs/
+log/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Local development
+local/
+dev/
+development/
+
+# Build and dist directories
+dist/
+build/
+out/
+
+# Node modules (if using any JavaScript/TypeScript tools)
+node_modules/
+
+# Python virtual environment (if using any Python tools)
+venv/
+env/
+.env/
+.venv/
+
+# Coverage and test reports
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+.coverage.*
+coverage.xml
+*.cover
+
+# Local .terraform directories
+**/.terraform/*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfvars files, which are likely to contain sensitive data
+*.tfvars
+*.tfvars.json
+
+# Ignore override files as they are usually used for local development
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
