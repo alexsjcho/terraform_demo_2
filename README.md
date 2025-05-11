@@ -42,32 +42,61 @@ This demo is designed for evaluation by ACME Corp's leadership, architects, DevO
    vault kv put secret/gcp credentials=@/path/to/your/gcp-credentials.json
    ```
 
-## Usage
+## Command Examples
 
-1. Initialize Terraform:
-   ```bash
-   terraform init
-   ```
+This section demonstrates common Terraform and Vault commands with their outputs.
 
-2. Review the planned changes:
-   ```bash
-   terraform plan
-   ```
+### Context
+In this demo, we're upgrading our compute resources to more powerful instances:
+- AWS: Upgrading from t2.micro to t3.medium (2 vCPU, 4 GB RAM)
+- GCP: Upgrading from e2-micro to e2-standard-2 (2 vCPU, 8 GB RAM)
 
-3. Apply the configuration:
-   ```bash
-   terraform apply
-   ```
+These changes are defined in our `terraform.tfvars` file and will be applied using the commands shown below.
 
-4. When done, destroy the resources:
-   ```bash
-   terraform destroy
-   ```
+### Terraform Commands
+
+#### Initialize Terraform
+```bash
+terraform init
+```
+![Terraform Init](assets/terraform_init.gif)
+
+#### Plan Changes
+```bash
+terraform plan
+```
+![Terraform Plan](assets/terraform_plan.gif)
+
+#### Apply Changes
+```bash
+terraform apply
+```
+![Terraform Apply](assets/terraform_apply.gif)
+
+#### State Management
+```bash
+# Pull current state
+terraform state pull
+
+# Show specific resource state
+terraform state show 'aws_instance.example'
+```
+![Terraform State Pull](assets/terraform_state_pull.gif)
+![Terraform State Show](assets/terraform_state_show.gif)
+
+### Vault Credentials
+
+#### View AWS and GCP Credentials
+```bash
+vault kv get secret/aws
+vault kv get secret/gcp
+```
+![Vault Credentials](assets/vault_aws_gcp_secrets.png)
 
 ## Resources Created
 
-- AWS: t2.micro EC2 instance running Amazon Linux 2
-- GCP: e2-micro Compute Engine instance running Debian 11
+- AWS: t3.medium EC2 instance running Amazon Linux 2
+- GCP: e2-standard-2 Compute Engine instance running Debian 11
 
 ## Security Notes
 
@@ -113,8 +142,3 @@ This demo is designed for evaluation by ACME Corp's leadership, architects, DevO
    ```bash
    terraform destroy
    ```
-
-## Resources Created
-
-- AWS: t2.micro EC2 instance running Amazon Linux 2
-- GCP: e2-micro Compute Engine instance running Debian 11 
