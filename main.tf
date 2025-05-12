@@ -59,7 +59,7 @@ data "vault_generic_secret" "gcp_creds" {
 # AWS EC2 Instance
 resource "aws_instance" "demo" {
   ami           = "ami-0735c191cf914754d"  # Amazon Linux 2 in us-west-2
-  instance_type = var.aws_instance_type    # Changed from hardcoded t2.micro to variable
+  instance_type = var.aws_instance_type    # Using variable for instance type
   tags = {
     Name = "terraform-demo"
   }
@@ -68,8 +68,9 @@ resource "aws_instance" "demo" {
 # GCP Compute Instance
 resource "google_compute_instance" "demo" {
   name         = "terraform-demo"
-  machine_type = var.gcp_machine_type     # Changed from hardcoded e2-micro to variable
+  machine_type = var.gcp_machine_type     # Using variable for machine type
   zone         = "us-central1-a"
+  allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
