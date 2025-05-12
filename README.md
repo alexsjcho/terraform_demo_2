@@ -2,6 +2,9 @@
 
 This project demonstrates a multi-cloud infrastructure setup using Terraform, with AWS and GCP resources, and secure secret management using HashiCorp Cloud Platform (HCP) Vault.
 
+## Presentation Slides
+For a detailed walkthrough of this demo, please refer to the [presentation slides](https://docs.google.com/presentation/d/10tLsCkK7mHBfLT0_qLeRqtoThEz-jS1t5B8d9ph5fvI/edit?usp=sharing).
+
 ## Addressing ACME Corp's Multi-Cloud Transition
 
 This demo directly addresses ACME Corp's strategic shift from AWS dependency to a multi-cloud approach, showcasing how Terraform can serve as a unified provisioning and automation strategy. Here's how this demo meets ACME's requirements:

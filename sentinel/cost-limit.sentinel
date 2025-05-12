@@ -1,0 +1,37 @@
+import "tfplan"
+import "decimal"
+
+# Maximum allowed cost in USD
+max_cost = decimal.new("50.00")
+
+# Function to get the total cost from the plan
+get_total_cost = func() {
+    # Initialize total cost
+    total = decimal.new("0.00")
+    
+    # Check if cost estimation exists in the plan
+    if tfplan.cost_estimation and tfplan.cost_estimation.resources {
+        # Sum up all resource costs
+        for tfplan.cost_estimation.resources as resource {
+            if resource.cost_component {
+                for resource.cost_component as component {
+                    if component.monthly_cost {
+                        total = total.add(decimal.new(component.monthly_cost))
+                    }
+                }
+            }
+        }
+    }
+    return total
+}
+
+# Function to check if cost exceeds budget
+exceeds_budget = func() {
+    cost = get_total_cost()
+    return cost > max_cost
+}
+
+# Main rule - returns true if cost exceeds budget
+main = rule {
+    exceeds_budget()
+} 

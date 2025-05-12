@@ -1,0 +1,59 @@
+{
+  "mock": {
+    "tfplan": {
+      "cost_estimation": {
+        "resources": [
+          {
+            "address": "aws_instance.demo",
+            "cost_component": [
+              {
+                "name": "Instance usage",
+                "monthly_cost": "224.00"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "test_cases": [
+    {
+      "name": "should return true when cost exceeds limit",
+      "rules": {
+        "main": true
+      }
+    },
+    {
+      "name": "should return false when cost is under limit",
+      "mock": {
+        "tfplan": {
+          "cost_estimation": {
+            "resources": [
+              {
+                "address": "aws_instance.demo",
+                "cost_component": [
+                  {
+                    "name": "Instance usage",
+                    "monthly_cost": "45.00"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "rules": {
+        "main": false
+      }
+    },
+    {
+      "name": "should return false when no cost estimation",
+      "mock": {
+        "tfplan": {}
+      },
+      "rules": {
+        "main": false
+      }
+    }
+  ]
+} 
