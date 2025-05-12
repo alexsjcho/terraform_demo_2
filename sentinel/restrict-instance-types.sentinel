@@ -1,0 +1,67 @@
+import "tfplan"
+import "strings"
+
+# Define high-cost instance types for AWS
+high_cost_aws_types = [
+    "m5.24xlarge",
+    "m5.12xlarge",
+    "c5.24xlarge",
+    "c5.12xlarge",
+    "r5.24xlarge",
+    "r5.12xlarge",
+    "x1.32xlarge",
+    "x1.16xlarge",
+    "p3.24xlarge",
+    "p3.16xlarge",
+]
+
+# Define high-cost machine types for GCP
+high_cost_gcp_types = [
+    "n1-ultramem-160",
+    "n1-ultramem-80",
+    "n1-megamem-96",
+    "n1-megamem-64",
+    "n2-ultramem-160",
+    "n2-ultramem-80",
+    "n2-megamem-96",
+    "n2-megamem-64",
+    "c2-ultramem-160",
+    "c2-ultramem-80",
+]
+
+# Function to check if an instance type is high cost
+is_high_cost_aws = func(instance_type) {
+    for high_cost_type in high_cost_aws_types {
+        if strings.lower(instance_type) == strings.lower(high_cost_type) {
+            return true
+        }
+    }
+    return false
+}
+
+is_high_cost_gcp = func(machine_type) {
+    for high_cost_type in high_cost_gcp_types {
+        if strings.lower(machine_type) == strings.lower(high_cost_type) {
+            return true
+        }
+    }
+    return false
+}
+
+# Main rule
+main = rule {
+    all [
+        # Check AWS instances
+        all tfplan.resources.aws_instance as _, instances {
+            all instances as _, instance {
+                not is_high_cost_aws(instance.applied.instance_type)
+            }
+        },
+        # Check GCP instances
+        all tfplan.resources.google_compute_instance as _, instances {
+            all instances as _, instance {
+                not is_high_cost_gcp(instance.applied.machine_type)
+            }
+        },
+    ]
+} 

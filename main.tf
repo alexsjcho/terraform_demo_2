@@ -1,4 +1,12 @@
 terraform {
+  cloud {
+    organization = "alexcho-demo"
+
+    workspaces {
+      name = "terraform-cli-demo"
+    }
+  }
+  
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -19,6 +27,7 @@ terraform {
 provider "vault" {
   address = var.vault_addr
   token   = var.vault_token
+  skip_tls_verify = true  # Only if using self-signed certificates
 }
 
 # AWS Provider
@@ -34,7 +43,7 @@ provider "google" {
   project = var.gcp_project_id
   region  = "us-central1"
   # Credentials will be fetched from Vault
-  credentials = data.vault_generic_secret.gcp_creds.data["credentials"]
+  credentials = jsonencode(data.vault_generic_secret.gcp_creds.data)
 }
 
 # Get AWS credentials from Vault

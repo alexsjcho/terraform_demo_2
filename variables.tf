@@ -10,19 +10,19 @@ variable "vault_token" {
   sensitive   = true
 }
 
-variable "gcp_project_id" {
-  description = "GCP Project ID"
-  type        = string
-}
-
 variable "aws_instance_type" {
-  description = "AWS EC2 instance type"
+  description = "AWS instance type"
   type        = string
   default     = "t2.micro"
 }
 
+variable "gcp_project_id" {
+  description = "GCP project ID"
+  type        = string
+}
+
 variable "gcp_machine_type" {
-  description = "GCP Compute Engine machine type"
+  description = "GCP machine type"
   type        = string
   default     = "e2-micro"
 } 
