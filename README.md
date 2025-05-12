@@ -2,6 +2,38 @@
 
 This project demonstrates a multi-cloud infrastructure setup using Terraform, with AWS and GCP resources, and secure secret management using HashiCorp Cloud Platform (HCP) Vault.
 
+## Addressing ACME Corp's Multi-Cloud Transition
+
+This demo directly addresses ACME Corp's strategic shift from AWS dependency to a multi-cloud approach, showcasing how Terraform can serve as a unified provisioning and automation strategy. Here's how this demo meets ACME's requirements:
+
+### 1. Multi-Cloud Provisioning
+- **AWS and GCP Integration**: Demonstrates provisioning across multiple cloud providers
+- **Unified Configuration**: Single Terraform configuration managing resources across platforms
+- **Consistent Workflow**: Same commands and processes regardless of the target platform
+
+### 2. Enterprise-Grade Features
+- **Remote State Management**: Using Terraform Cloud for secure state storage
+- **Secret Management**: Integration with HCP Vault for secure credential handling
+- **Policy Enforcement**: Sentinel policies for cost control and compliance
+- **Cost Estimation**: Built-in cost tracking and optimization features
+
+### 3. Migration Path from Current Tools
+- **Python Scripts**: Terraform's declarative approach replaces imperative scripting
+- **ServiceNow**: Automated provisioning reduces manual ticket creation
+- **Ansible**: Terraform handles infrastructure provisioning while Ansible can focus on configuration
+
+### 4. Technical Demonstration
+- **VM Provisioning**: Creates EC2 instances in AWS and Compute Engine instances in GCP
+- **Multi-Tier Setup**: Demonstrates infrastructure across multiple cloud providers
+- **Security Best Practices**: Implements secure credential management
+- **Cost Control**: Shows how to prevent expensive resource provisioning
+
+### 5. Enterprise Readiness
+- **Version Control**: Full Git integration for infrastructure changes
+- **Collaboration**: Team-based access control and audit logging
+- **Compliance**: Policy enforcement through Sentinel
+- **Documentation**: Comprehensive README and inline code documentation
+
 ## Architecture
 
 - **Infrastructure**: AWS EC2 and GCP Compute Engine instances
@@ -81,6 +113,10 @@ The image above shows the HCP Terraform interface displaying run history, plan o
    }
    ```
 
+![HCP Vault Secrets](assets/hcp_vault_secrets.png)
+
+The image above shows the HCP Vault interface where we store and manage our cloud provider credentials securely.
+
 ### Required Terraform Cloud Variables
 
 - `vault_addr`: HCP Vault cluster address
@@ -138,16 +174,38 @@ The project includes Sentinel policies to enforce:
    ```bash
    terraform init
    ```
+   This command initializes the working directory containing Terraform configuration files.
+
+   ![Terraform Init](assets/terraform_init.gif)
 
 2. **Plan Changes**
    ```bash
    terraform plan
    ```
+   This command creates an execution plan, showing what actions Terraform will take to reach the desired state.
+
+   ![Terraform Plan](assets/terraform_plan.gif)
 
 3. **Apply Changes**
    ```bash
    terraform apply
    ```
+   This command applies the changes required to reach the desired state of the configuration.
+
+   ![Terraform Apply](assets/terraform_apply.gif)
+
+4. **State Management**
+   ```bash
+   # Pull the current state
+   terraform state pull
+
+   # Show specific resource state
+   terraform state show aws_instance.demo
+   ```
+   These commands help manage and inspect the Terraform state.
+
+   ![Terraform State Pull](assets/terraform_state_pull.gif)
+   ![Terraform State Show](assets/terraform_state_show.gif)
 
 ## Security Notes
 
